@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "914238560599",
+    "firebase_url": "https://cookex-db.firebaseio.com",
+    "project_id": "cookex-db",
+    "storage_bucket": "cookex-db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914238560599:android:2ce233581cda3610078612",
+        "android_client_info": {
+          "package_name": "com.project.cookex"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "914238560599-irsn8bvk8iiuek99itb566o0gqpf5r0p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.cookex",
+            "certificate_hash": "731100c1a0565c9c03938b8290b6ec9fe557fc34"
+          }
+        },
+        {
+          "client_id": "914238560599-jjdvaftd6cud6sb2a6qadp5f0b7d7iel.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAx2EH3AzK1zaZDAEJB5zmJ9SHPPnIxOWE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "914238560599-jjdvaftd6cud6sb2a6qadp5f0b7d7iel.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
