@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">CookEx</string>
+    <string name="placeholder">placeholder</string>
 
-    <string name="hello">Helloooo click the btn</string>
+    <string name="auth_failed">Authentication failed.</string>
+    <string name="email">Email:</string>
+    <string name="password">Password:</string>
+    <string name="signup_button">SIGN UP</string>
 </resources>
