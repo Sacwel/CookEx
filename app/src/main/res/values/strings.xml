@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CookEx</string>
+
+    <string name="hello">Helloooo click the btn</string>
 </resources>
