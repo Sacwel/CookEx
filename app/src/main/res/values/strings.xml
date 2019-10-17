@@ -6,4 +6,6 @@
     <string name="email">Email:</string>
     <string name="password">Password:</string>
     <string name="register_button">REGISTER</string>
+    <string name="login_button">LOGIN</string>
+    <string name="register_hyperlink">Want to sign up? Click here.</string>
 </resources>

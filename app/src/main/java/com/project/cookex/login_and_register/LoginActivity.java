@@ -3,10 +3,13 @@ package com.project.cookex.login_and_register;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -28,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     private EditText mEmailField, mPasswordField;
-    private TextView mStatusTextView;
+    private TextView mStatusTextView, mRegisterHyperlink;
 
     @Override
     protected void onStart() {
@@ -50,7 +53,21 @@ public class LoginActivity extends AppCompatActivity {
         mPasswordField = findViewById(R.id.loginPasswordField);
         mStatusTextView = findViewById(R.id.statusTextView);
 
+        Button mLoginButton = findViewById(R.id.loginButton);
+        mLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Redirect inside app etc
+            }
+        });
 
+        mRegisterHyperlink = findViewById(R.id.registerHyperlink);
+        mRegisterHyperlink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToRegister = new Intent(LoginActivity.this, RegisterActivity.class);
+            }
+        });
     }
 
     private void signIn(String email, String password) {
