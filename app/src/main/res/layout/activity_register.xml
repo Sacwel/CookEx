@@ -31,11 +31,11 @@
         app:layout_constraintTop_toBottomOf="@+id/signupEmailField" />
 
     <Button
-        android:id="@+id/signupButton"
+        android:id="@+id/registerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:text="@string/signup_button"
+        android:text="@string/register_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signupPassField" />
@@ -49,5 +49,5 @@
         android:textColor="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signupButton" />
+        app:layout_constraintTop_toBottomOf="@+id/registerButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
