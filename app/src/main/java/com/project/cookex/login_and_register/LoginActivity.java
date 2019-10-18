@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     private EditText mEmailField, mPasswordField;
-    private TextView mStatusTextView, mRegisterHyperlink;
+    private TextView mStatusTextView;
 
     @Override
     protected void onStart() {
@@ -66,8 +66,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        mRegisterHyperlink = findViewById(R.id.registerHyperlink);
-        mRegisterHyperlink.setOnClickListener(new View.OnClickListener() {
+        TextView registerHyperlink = findViewById(R.id.registerHyperlink);
+        registerHyperlink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent goToRegister = new Intent(LoginActivity.this, RegisterActivity.class);
@@ -115,6 +115,8 @@ public class LoginActivity extends AppCompatActivity {
         // [END sign_in_with_email]
     }
 
+
+    // Form to validate inputs in the email/passwrd fields
     private boolean validateForm() {
         boolean valid = true;
 
@@ -161,6 +163,7 @@ public class LoginActivity extends AppCompatActivity {
         if (currentUser != null) {
 
             // Redirect the user inside the app after checking if he's already signed in
+
 
         } else {
 
