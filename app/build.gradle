@@ -5,7 +5,7 @@ android {
     compileSdkVersion 29
     defaultConfig {
         applicationId "com.project.cookex"
-        minSdkVersion 19
+        minSdkVersion 26
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -28,8 +28,13 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    // Core
+    implementation 'androidx.core:core-ktx:1.1.0'
+
     // Extra implementations
     implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.api-client:google-api-client:1.30.2'
+    implementation 'com.google.api-client:google-api-client-android:1.25.0'
 
     //  Firebase Implementations
     implementation 'com.google.firebase:firebase-auth:19.1.0'
