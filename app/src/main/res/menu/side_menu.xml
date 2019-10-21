@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/Categories"
+        android:title="@string/categories">
+
+        <menu>
+            <group>
+
+                <item android:title="name1"/>
+
+                <item android:title="name2"/>
+
+                <item android:title="name3"/>
+
+            </group>
+
+        </menu>
+
+    </item>
+
+    <item android:title="@string/search"/>
+
+    <item android:title="@string/create_recipe"/>
+
+    <item android:title="@string/settings"/>
+
+</menu>
