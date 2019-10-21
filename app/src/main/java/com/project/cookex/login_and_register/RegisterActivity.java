@@ -56,6 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 storeDetails(email, password);
                 createAccount(email, password);
+
             }
         });
     }
