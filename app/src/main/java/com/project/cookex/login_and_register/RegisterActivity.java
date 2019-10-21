@@ -15,16 +15,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.project.cookex.HomeActivity;
 import com.project.cookex.R;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private static final String TAG = "EmailPasswordSignup";
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
 
     private EditText mEmailField, mPasswordField;
 
@@ -34,6 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         mEmailField = findViewById(R.id.signupEmailField);
         mPasswordField = findViewById(R.id.signupPassField);
@@ -45,12 +54,37 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = mEmailField.getText().toString().trim();
                 String password = mPasswordField.getText().toString().trim();
 
+                storeDetails(email, password);
                 createAccount(email, password);
             }
         });
     }
 
-    private void createAccount(String email, String password) {
+    private void storeDetails(String email, String password) {
+
+        // Create a new user with a first and last name
+        Map<String, Object> userInfo = new HashMap<>();
+        userInfo.put("email", email);
+        userInfo.put("password", password);
+
+        // Add a new document with a generated ID
+        db.collection("users")
+                .add(userInfo)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+    }
+
+    private void createAccount(final String email, final String password) {
         Log.d(TAG, "createAccount:" + email);
         if (!validateForm()) {
             return;
@@ -63,7 +97,6 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Account creation success, update UI with the signed-in user's information
-                            System.out.println("User was created");
                             Toast.makeText(RegisterActivity.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
 
                             Intent registrationSuccess = new Intent(RegisterActivity.this, HomeActivity.class);
