@@ -21,6 +21,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle mToggle;
     private Toolbar toolbar;
+    private TextView mViewProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,16 +47,27 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.navigation_view);
+        final NavigationView navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View header = navigationView.getHeaderView(0);
+        mViewProfile = header.findViewById(R.id.view_profile_button);
+        mViewProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ProfileActivity()).commit();
+                drawerLayout.closeDrawers();
+            }
+        });
+
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.profile_button:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ProfileActivity()).commit();
+            case R.id.Create_recipe:
+                Toast.makeText(this, "Create a recipe", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.Categories:
                 Toast.makeText(this, "Categories", Toast.LENGTH_SHORT).show();
@@ -65,4 +77,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

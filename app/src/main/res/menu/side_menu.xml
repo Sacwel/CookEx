@@ -19,13 +19,13 @@
 
     </item>
 
-    <item android:id="@+id/profile_button"
-        android:title="Profile"/>
+    <item android:id="@+id/search_button"
+        android:title="@string/search" />
 
-    <item android:title="@string/search"/>
+    <item android:id="@+id/Create_recipe"
+        android:title="@string/create_recipe"/>
 
-    <item android:title="@string/create_recipe"/>
-
-    <item android:title="@string/settings"/>
+    <item android:id="@+id/Settings"
+        android:title="@string/settings"/>
 
 </menu>
