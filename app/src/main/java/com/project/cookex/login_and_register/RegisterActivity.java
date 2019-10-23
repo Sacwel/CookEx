@@ -54,8 +54,8 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = mEmailField.getText().toString().trim();
                 String password = mPasswordField.getText().toString().trim();
 
-                storeDetails(email, password);
                 createAccount(email, password);
+                storeDetails(email, password);
 
             }
         });
@@ -75,6 +75,9 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        Intent registrationSuccess = new Intent(RegisterActivity.this, HomeActivity.class);
+                        registrationSuccess.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK + Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(registrationSuccess);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -99,10 +102,6 @@ public class RegisterActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Account creation success, update UI with the signed-in user's information
                             Toast.makeText(RegisterActivity.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
-
-                            Intent registrationSuccess = new Intent(RegisterActivity.this, HomeActivity.class);
-                            registrationSuccess.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK + Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(registrationSuccess);
 
                         } else {
                             // If sign up fails, display a message to the user.
