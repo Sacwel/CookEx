@@ -19,6 +19,9 @@
 
     </item>
 
+    <item android:id="@+id/profile_button"
+        android:title="Profile"/>
+
     <item android:title="@string/search"/>
 
     <item android:title="@string/create_recipe"/>

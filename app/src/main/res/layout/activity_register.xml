@@ -7,12 +7,13 @@
     tools:context=".login_and_register.RegisterActivity"
     android:orientation="vertical">
 
-    <android.support.design.widget.TextInputLayout
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginLeft="32dp"
-        app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout"/>
+        android:id="@+id/signupEmailField"
+        android:ems="10"
+        android:hint="Username:"
+        />
 
     <EditText
         android:id="@+id/signupPassField"

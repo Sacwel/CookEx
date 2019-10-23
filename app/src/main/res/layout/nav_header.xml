@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="160dp"
+    android:layout_height="200dp"
     android:id="@+id/nav_header"
     android:background="@color/colorPrimaryDark"
     android:clickable="true"
     android:focusable="true"
-    android:gravity="bottom"
+    android:gravity="center_vertical"
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
@@ -22,8 +22,18 @@
         android:id="@+id/nav_header_username_display"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="16dp"
+        android:paddingTop="10dp"
         android:text="@string/username"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+
+    <TextView
+        android:id="@+id/view_profile_button"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="VIEW PROFILE"
+        android:textColor="#FFF"
+        android:fontFamily="bold"
+        android:textSize="16sp"/>
 
 </LinearLayout>
