@@ -11,6 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
@@ -35,10 +36,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             public void onDrawerClosed(View drawerView) {super.onDrawerClosed(drawerView);}
 
             @Override
-            public void onDrawerOpened(View draweView) {
-                super.onDrawerOpened(draweView);
-                draweView.bringToFront();
-                draweView.requestLayout();
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                drawerView.bringToFront();
+                drawerView.requestLayout();
             }
         };
 
