@@ -101,11 +101,13 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Account creation success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
                             Toast.makeText(RegisterActivity.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
                             storeDetails(email, password);
 
                         } else {
                             // If sign up fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             System.out.println("Unable to create user");
                             Toast.makeText(getApplicationContext(), "Registration Failed.", Toast.LENGTH_SHORT).show();
 
