@@ -1,16 +1,24 @@
 package com.project.cookex.login_and_register;
 
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class User {
 
     private String firstName, middleName, lastName;
     private String email, password;
     private int age, postalCode;
 
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference colRef = db.collection("users");
+
     public User() {}
 
     public User(String email, String password) {
         this.email = email;
         this.password = password;
+        DocumentReference docRef = colRef.document(email);
     }
 
     public User(String firstName, String lastName, String email, String password) {
@@ -18,6 +26,7 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        DocumentReference docRef = colRef.document(email);
     }
 
     public User(String firstName, String middleName, String lastName, String email, String password) {
@@ -26,6 +35,7 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        DocumentReference docRef = colRef.document(email);
     }
 
     public String getFirstName() {
