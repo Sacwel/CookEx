@@ -102,6 +102,7 @@ public class RegisterActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Account creation success, update UI with the signed-in user's information
                             Toast.makeText(RegisterActivity.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
+                            storeDetails(email, password);
 
                         } else {
                             // If sign up fails, display a message to the user.

@@ -90,18 +90,16 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             // Sign in success, update UI with the signed-in user's information
-                            System.out.println("Signed In");
                             Toast.makeText(LoginActivity.this, "Sign in Successful!", Toast.LENGTH_SHORT).show();
 
-                            Intent loginSuccess = new Intent(LoginActivity.this, HomeActivity.class);
-                            loginSuccess.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK + Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(loginSuccess);
+                            FirebaseUser currentUser = mAuth.getCurrentUser();
+                            updateUI(currentUser);
 
                         } else {
 
                             // If sign in fails, display a message to the user.
-                            System.out.println("Unable to sign in");
                             Toast.makeText(getApplicationContext(), "Login Failed.", Toast.LENGTH_SHORT).show();
+                            updateUI(null);
 
                         }
 
@@ -114,7 +112,6 @@ public class LoginActivity extends AppCompatActivity {
                 });
         // [END sign_in_with_email]
     }
-
 
     // Form to validate inputs in the email/passwrd fields
     private boolean validateForm() {
@@ -139,35 +136,20 @@ public class LoginActivity extends AppCompatActivity {
         return valid;
     }
 
-    private void getCurrentUser() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // Name, email address, and profile photo Url
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-            Uri photoUrl = user.getPhotoUrl();
-
-            // Check if user's email is verified
-            boolean emailVerified = user.isEmailVerified();
-
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getIdToken() instead.
-
-            String uid = user.getUid();
-        }
-    }
-
-
     private void updateUI(FirebaseUser currentUser) {
         if (currentUser != null) {
 
             // Redirect the user inside the app after checking if he's already signed in
-
+            System.out.println("User Signed In Successfully");
+            Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+            Intent loginSuccess = new Intent(LoginActivity.this, HomeActivity.class);
+            loginSuccess.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK + Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(loginSuccess);
 
         } else {
 
             // Otherwise redirect to the sign in/sign up screen
+            Toast.makeText(getApplicationContext(), "Login Failed. Try Again", Toast.LENGTH_SHORT).show();
 
         }
     }
