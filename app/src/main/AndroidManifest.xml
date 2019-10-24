@@ -12,6 +12,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".HomeActivity" />
+        <activity android:name=".SettingsActivity"/>
         <activity android:name=".login_and_register.RegisterActivity" />
         <activity android:name=".login_and_register.LoginActivity">
             <intent-filter>

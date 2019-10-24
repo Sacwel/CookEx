@@ -1,6 +1,7 @@
 package com.project.cookex;
 
 import com.google.android.material.navigation.NavigationView;
+import com.project.cookex.login_and_register.RegisterActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -72,8 +74,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Categories", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.Settings:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new SettingsFrag()).commit();
+                Intent goToSettings = new Intent(HomeActivity.this, SettingsActivity.class);
+                goToSettings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK + Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(goToSettings);
                 break;
         }
 
