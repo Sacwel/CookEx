@@ -15,15 +15,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentManager;
-
-import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle mToggle;
-    private Toolbar toolbar;
+    private Toolbar mToolbar;
     private TextView mViewProfile;
 
     @Override
@@ -31,11 +28,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
-        mToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close) {
+        mToggle = new ActionBarDrawerToggle(this, drawerLayout, mToolbar, R.string.open, R.string.close) {
             @Override
             public void onDrawerClosed(View drawerView) {super.onDrawerClosed(drawerView);}
 
@@ -76,7 +73,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.Settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new SettingsAcrivity()).commit();
+                        new SettingsFrag()).commit();
                 break;
         }
 
