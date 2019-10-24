@@ -30,21 +30,12 @@ public class UserHandler {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
 
-    // User type
-    public static int USER_TYPE;
-    public int getUserType() {
-        return USER_TYPE;
-    }
-    public void setUserType(int i) { USER_TYPE = i; }
-
     // Collection reference
     private CollectionReference users = db.collection("users");
 
-    private static final String KEY_TYPE = "Type";
     private static final String KEY_NAME = "Name";
     private static final String KEY_LAST_NAME = "Last Name";
     private static final String KEY_EMAIL = "Email";
-
 
     public String getEmailCredentials() {
         return emailCredentials;
@@ -82,7 +73,6 @@ public class UserHandler {
         user.put(KEY_NAME, firstNameVal);
         user.put(KEY_LAST_NAME, lastNameVal);
         user.put(KEY_EMAIL, emailVal);
-        user.put(KEY_TYPE, USER_TYPE);
 
         users.document(emailVal)
                 .set(user)
@@ -129,15 +119,5 @@ public class UserHandler {
                 });
     }
 
-    public void delete() {
-
-        if (USER_TYPE == 1) {
-            users.document(emailCredentials).delete();
-        }
-
-        if (USER_TYPE == 2){
-            //If we want to create several types of users later on it should be specified here
-        }
-    }
 
 }
