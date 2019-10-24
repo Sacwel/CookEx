@@ -27,7 +27,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
                 Intent signOutSuccess = new Intent(SettingsActivity.this, LoginActivity.class);
-                signOutSuccess.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK + Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                //signOutSuccess.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK + Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(signOutSuccess);
             }
         });

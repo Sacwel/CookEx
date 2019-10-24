@@ -21,7 +21,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.project.cookex.DatabaseHandling.UserHandler;
+import com.project.cookex.database_handling.UserHandler;
 import com.project.cookex.HomeActivity;
 import com.project.cookex.R;
 

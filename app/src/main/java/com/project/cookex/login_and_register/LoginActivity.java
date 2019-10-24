@@ -70,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent goToRegister = new Intent(LoginActivity.this, RegisterActivity.class);
+                goToRegister.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK + Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(goToRegister);
             }
         });

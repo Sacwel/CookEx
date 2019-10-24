@@ -75,7 +75,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.Settings:
                 Intent goToSettings = new Intent(HomeActivity.this, SettingsActivity.class);
-                goToSettings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK + Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(goToSettings);
                 break;
         }

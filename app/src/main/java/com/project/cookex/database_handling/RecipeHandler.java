@@ -1,4 +1,4 @@
-package com.project.cookex.DatabaseHandling;
+package com.project.cookex.database_handling;
 
 public class RecipeHandler {
 
