@@ -8,6 +8,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class User {
 
+    private static final String TAG = "UserClass";
+
     private String firstName, middleName, lastName;
     private String email, password;
     private int age, postalCode;

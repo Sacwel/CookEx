@@ -54,14 +54,45 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = mEmailField.getText().toString().trim();
-                String password = mPasswordField.getText().toString().trim();
+               String email = mEmailField.getText().toString().trim();
+               String password = mPasswordField.getText().toString().trim();
+
+                uDBHandler.setEmailCredentials(email);
+                uDBHandler.setPasswordCredentials(password);
 
                 createAccount(email, password);
                 storeDetails(email, password);
 
             }
         });
+    }
+
+    public void createAccount(final String email, final String password) {
+        Log.d(TAG, "createAccount:" + email);
+        if (!validateForm()) {
+            return;
+        }
+
+        // [START create_user_with_email]
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Account creation success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
+                            Toast.makeText(RegisterActivity.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            // If sign up fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            System.out.println("Unable to create user");
+                            Toast.makeText(getApplicationContext(), "Registration Failed.", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+        // [END create_user_with_email]
     }
 
     private void storeDetails(String email, String password) {
@@ -89,34 +120,6 @@ public class RegisterActivity extends AppCompatActivity {
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
-    }
-
-    private void createAccount(final String email, final String password) {
-        Log.d(TAG, "createAccount:" + email);
-        if (!validateForm()) {
-            return;
-        }
-
-        // [START create_user_with_email]
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Account creation success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            Toast.makeText(RegisterActivity.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
-
-                        } else {
-                            // If sign up fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            System.out.println("Unable to create user");
-                            Toast.makeText(getApplicationContext(), "Registration Failed.", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-                });
-        // [END create_user_with_email]
     }
 
     private boolean validateForm() {

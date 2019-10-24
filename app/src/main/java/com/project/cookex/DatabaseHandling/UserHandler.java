@@ -1,6 +1,7 @@
 package com.project.cookex.DatabaseHandling;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -9,6 +10,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,11 +20,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-import static android.content.ContentValues.TAG;
-
 public class UserHandler {
 
-    public static String emailCredentials, passwordCredentials;
+    private String emailCredentials, passwordCredentials;
+
+    private static final String TAG = "UserHandler";
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -43,24 +45,22 @@ public class UserHandler {
     private static final String KEY_LAST_NAME = "Last Name";
     private static final String KEY_EMAIL = "Email";
 
-    // Getters & Setters
-    public static String getEmailCredentials() {
+
+    public String getEmailCredentials() {
         return emailCredentials;
     }
 
-    public static void setEmailCredentials(String emailCredentials) {
-        UserHandler.emailCredentials = emailCredentials;
+    public void setEmailCredentials(String emailCredentials) {
+        this.emailCredentials = emailCredentials;
     }
 
-    public static String getPasswordCredentials() {
+    public String getPasswordCredentials() {
         return passwordCredentials;
     }
 
-    public static void setPasswordCredentials(String passwordCredentials) {
-        UserHandler.passwordCredentials = passwordCredentials;
+    public void setPasswordCredentials(String passwordCredentials) {
+        this.passwordCredentials = passwordCredentials;
     }
-
-
 
     public void emailVerification() {
 
