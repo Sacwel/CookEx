@@ -47,6 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         uDBHandler = new UserHandler();
 
+
         mEmailField = findViewById(R.id.signupEmailField);
         mPasswordField = findViewById(R.id.signupPassField);
 
