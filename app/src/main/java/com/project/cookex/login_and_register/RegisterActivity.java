@@ -11,7 +11,6 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,6 +21,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.project.cookex.DatabaseHandling.UserHandler;
 import com.project.cookex.HomeActivity;
 import com.project.cookex.R;
 
@@ -33,6 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "EmailPasswordSignup";
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+    private UserHandler uDBHandler;
 
     private EditText mEmailField, mPasswordField;
 
@@ -43,6 +44,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+
+        uDBHandler = new UserHandler();
 
         mEmailField = findViewById(R.id.signupEmailField);
         mPasswordField = findViewById(R.id.signupPassField);
@@ -103,7 +106,6 @@ public class RegisterActivity extends AppCompatActivity {
                             // Account creation success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             Toast.makeText(RegisterActivity.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
-                            storeDetails(email, password);
 
                         } else {
                             // If sign up fails, display a message to the user.

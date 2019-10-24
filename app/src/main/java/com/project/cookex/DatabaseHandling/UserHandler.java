@@ -42,8 +42,25 @@ public class UserHandler {
     private static final String KEY_NAME = "Name";
     private static final String KEY_LAST_NAME = "Last Name";
     private static final String KEY_EMAIL = "Email";
-    private static final String KEY_ADDRESS = "Address";
-    private static final String KEY_DESCRIPTION = "Description";
+
+    // Getters & Setters
+    public static String getEmailCredentials() {
+        return emailCredentials;
+    }
+
+    public static void setEmailCredentials(String emailCredentials) {
+        UserHandler.emailCredentials = emailCredentials;
+    }
+
+    public static String getPasswordCredentials() {
+        return passwordCredentials;
+    }
+
+    public static void setPasswordCredentials(String passwordCredentials) {
+        UserHandler.passwordCredentials = passwordCredentials;
+    }
+
+
 
     public void emailVerification() {
 
@@ -61,12 +78,10 @@ public class UserHandler {
     }
 
     public void saveUser(String firstNameVal, String lastNameVal, String emailVal) {
-        //setUID();
         Map<String, Object> user = new HashMap<>();
         user.put(KEY_NAME, firstNameVal);
         user.put(KEY_LAST_NAME, lastNameVal);
         user.put(KEY_EMAIL, emailVal);
-        // user.put(KEY_ID, UID);
         user.put(KEY_TYPE, USER_TYPE);
 
         users.document(emailVal)
