@@ -4,6 +4,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.project.cookex.login_and_register.RegisterActivity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -58,7 +59,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ProfileActivity()).commit();
+                        new ProfileActivity()).addToBackStack("TAG").commit();
                 drawerLayout.closeDrawers();
             }
         });
