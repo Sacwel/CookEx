@@ -3,6 +3,7 @@ package com.project.cookex;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
@@ -24,6 +25,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         Toolbar mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         Button signOutButton = findViewById(R.id.SignOutButton);
         signOutButton.setOnClickListener(new View.OnClickListener() {
