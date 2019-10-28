@@ -58,7 +58,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ProfileActivity()).commit();
+                        new ProfileActivity()).addToBackStack("TAG").commit();
                 drawerLayout.closeDrawers();
             }
         });
