@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.project.cookex.database_handling.UserHandler;
@@ -31,8 +33,8 @@ import java.util.Map;
 public class RegisterActivity extends AppCompatActivity {
 
     private static final String TAG = "EmailPasswordSignup";
+
     private FirebaseAuth mAuth;
-    private FirebaseFirestore db;
     private UserHandler uDBHandler;
 
     private EditText mEmailField, mPasswordField;
@@ -43,10 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
-
         uDBHandler = new UserHandler();
-
 
         mEmailField = findViewById(R.id.signupEmailField);
         mPasswordField = findViewById(R.id.signupPassField);
@@ -58,12 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
                String email = mEmailField.getText().toString().trim();
                String password = mPasswordField.getText().toString().trim();
 
-                uDBHandler.setEmailCredentials(email);
-                uDBHandler.setPasswordCredentials(password);
-
-                createAccount(email, password);
-                storeDetails(email, password);
-
+               createAccount(email, password);
             }
         });
     }
@@ -81,13 +75,19 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Account creation success, update UI with the signed-in user's information
+                            uDBHandler = new UserHandler(email, password);
+                            uDBHandler.saveUser(email);
+
                             Log.d(TAG, "createUserWithEmail:success");
                             Toast.makeText(RegisterActivity.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
+
+                            Intent registrationSuccess = new Intent(RegisterActivity.this, HomeActivity.class);
+                            registrationSuccess.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK + Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(registrationSuccess);
 
                         } else {
                             // If sign up fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            System.out.println("Unable to create user");
                             Toast.makeText(getApplicationContext(), "Registration Failed.", Toast.LENGTH_SHORT).show();
 
                         }
@@ -96,31 +96,10 @@ public class RegisterActivity extends AppCompatActivity {
         // [END create_user_with_email]
     }
 
-    private void storeDetails(String email, String password) {
-
-        // Create a new user with a first and last name
-        Map<String, Object> userInfo = new HashMap<>();
-        userInfo.put("email", email);
-        userInfo.put("password", password);
-
-        // Add a new document with a generated ID
-        db.collection("users")
-                .add(userInfo)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                        Intent registrationSuccess = new Intent(RegisterActivity.this, HomeActivity.class);
-                        registrationSuccess.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK + Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(registrationSuccess);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });
+    public void registerComplete() {
+        Intent registrationSuccess = new Intent(RegisterActivity.this, HomeActivity.class);
+        registrationSuccess.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK + Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(registrationSuccess);
     }
 
     private boolean validateForm() {
