@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.widget.Toolbar;
 
+import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -61,6 +62,9 @@ public class SettingsActivity extends AppCompatActivity {
     private void signOut() {
         // Firebase sign out
         mAuth.signOut();
+
+        // Facebook sign out
+        LoginManager.getInstance().logOut();
 
         // Google sign out
         mGoogleSignInClient.signOut().addOnCompleteListener(this,
