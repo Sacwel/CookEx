@@ -13,6 +13,7 @@ import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -22,8 +23,8 @@ public class UserHandler {
 
     private static final String TAG = "UserHandler";
 
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
+    private FirebaseAuth mAuth;
+    private FirebaseUser fUser;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private static final String KEY_FIRST_NAME = "First";
@@ -36,10 +37,12 @@ public class UserHandler {
     private String firstName, middleName, lastName;
     private String email, password, birthday;
 
-    // Constructors
+    // Constructors - the proper one will be used depending on how much info users give during registry
     public UserHandler(String email, String password) {
         this.email = email;
         this.password = password;
+        this.mAuth = FirebaseAuth.getInstance();
+        this.fUser = mAuth.getCurrentUser();
     }
 
     public UserHandler(String firstName, String lastName, String email, String password) {
@@ -47,6 +50,8 @@ public class UserHandler {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.mAuth = FirebaseAuth.getInstance();
+        this.fUser = mAuth.getCurrentUser();
     }
 
     public UserHandler(String firstName, String middleName, String lastName, String email, String password) {
@@ -55,9 +60,11 @@ public class UserHandler {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.mAuth = FirebaseAuth.getInstance();
+        this.fUser = mAuth.getCurrentUser();
     }
 
-    public UserHandler() {}
+    public UserHandler(){}
 
     // Getters & Setters
     public String getFirstName() {
@@ -103,7 +110,7 @@ public class UserHandler {
     }
 
     // Firebase stuff
-    public void emailVerification() {
+    public void sendEmailVerification() {
 
         if (fUser != null) {
             fUser.sendEmailVerification()
@@ -118,6 +125,7 @@ public class UserHandler {
         }
     }
 
+    // Used this in P2 for something, it might become useful
     public void reAuthUser() {
         // Get auth credentials from the user for re-authentication. The example below shows
         // email and password credentials but there are multiple possible providers,
@@ -146,26 +154,31 @@ public class UserHandler {
                 });
     }
 
-    public void saveUser(final String email) {
+    public void saveUser() {
+
+        // Creates a reference to the Firebase Firestore collection named users
         CollectionReference users = db.collection("users");
 
+        // Mapping the information given with the makeDocument method
         Map userInfo = makeDocument();
-        users.document(email)
-                .set(userInfo)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
+
+        // Add the mapped information to the users collection as a document with a generated ID
+        users.add(userInfo)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully written with ID: " + email);
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing document", e);
+                        Log.w(TAG, "Error adding document", e);
                     }
                 });
     }
 
+    // Depending on the information given during registry, the proper map will be created
     private Map<String, Object> makeDocument() {
         HashMap<String, Object> userInfo = new HashMap<>();
 

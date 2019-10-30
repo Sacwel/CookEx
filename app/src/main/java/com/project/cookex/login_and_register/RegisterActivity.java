@@ -14,21 +14,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.project.cookex.database_handling.UserHandler;
 import com.project.cookex.HomeActivity;
 import com.project.cookex.R;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -62,6 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    // Firebase's own createAccount method with some personalization
     public void createAccount(final String email, final String password) {
         Log.d(TAG, "createAccount:" + email);
         if (!validateForm()) {
@@ -74,18 +66,14 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Account creation success, update UI with the signed-in user's information
-                            uDBHandler = new UserHandler(email, password);
-                            uDBHandler.saveUser(email);
 
+                            // Account creation success, update UI with the users saved information
+                            saveUser(email, password);
                             Log.d(TAG, "createUserWithEmail:success");
                             Toast.makeText(RegisterActivity.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
 
-                            Intent registrationSuccess = new Intent(RegisterActivity.this, HomeActivity.class);
-                            registrationSuccess.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK + Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(registrationSuccess);
-
                         } else {
+
                             // If sign up fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(getApplicationContext(), "Registration Failed.", Toast.LENGTH_SHORT).show();
@@ -96,12 +84,19 @@ public class RegisterActivity extends AppCompatActivity {
         // [END create_user_with_email]
     }
 
-    public void registerComplete() {
+    // Creates an instance of the handler class and calls it's saveUser method
+    private void saveUser(String email, String password) {
+        uDBHandler = new UserHandler(email, password);
+        uDBHandler.saveUser();
+        uDBHandler.sendEmailVerification();
+
+        // Start the home activity and flag this one for destruction
         Intent registrationSuccess = new Intent(RegisterActivity.this, HomeActivity.class);
         registrationSuccess.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK + Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(registrationSuccess);
     }
 
+    // Method to check if all fields on the registry page is filled in properly
     private boolean validateForm() {
         boolean valid = true;
 
