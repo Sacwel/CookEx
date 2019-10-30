@@ -12,7 +12,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.project.cookex.login_and_register.LoginActivity;
-import com.project.cookex.login_and_register.RegisterActivity;
 
 public class SettingsActivity extends AppCompatActivity {
 

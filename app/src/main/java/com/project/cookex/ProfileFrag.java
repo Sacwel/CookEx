@@ -13,7 +13,7 @@ import java.util.Objects;
 
 import javax.annotation.Nullable;
 
-public class ProfileActivity extends Fragment {
+public class ProfileFrag extends Fragment {
 
     @Nullable
     @Override

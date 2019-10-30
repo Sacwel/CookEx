@@ -1,10 +1,8 @@
 package com.project.cookex;
 
 import com.google.android.material.navigation.NavigationView;
-import com.project.cookex.login_and_register.RegisterActivity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -22,22 +20,22 @@ import androidx.appcompat.widget.Toolbar;
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle mToggle;
     private Toolbar mToolbar;
-    private TextView mViewProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
-        mToggle = new ActionBarDrawerToggle(this, drawerLayout, mToolbar, R.string.open, R.string.close) {
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, mToolbar, R.string.open, R.string.close) {
             @Override
-            public void onDrawerClosed(View drawerView) {super.onDrawerClosed(drawerView);}
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
 
             @Override
             public void onDrawerOpened(View drawerView) {
@@ -47,19 +45,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         };
 
-        drawerLayout.addDrawerListener(mToggle);
-        mToggle.syncState();
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
 
         final NavigationView navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         View header = navigationView.getHeaderView(0);
-        mViewProfile = header.findViewById(R.id.view_profile_button);
-        mViewProfile.setOnClickListener(new View.OnClickListener() {
+        TextView viewProfile = header.findViewById(R.id.view_profile_button);
+        viewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ProfileActivity()).addToBackStack("TAG").commit();
+                        new ProfileFrag()).addToBackStack("TAG").commit();
                 drawerLayout.closeDrawers();
             }
         });
