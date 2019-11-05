@@ -68,7 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             // Account creation success, update UI with the users saved information
-                            saveUser(email, password);
+                            saveUser(email);
                             Log.d(TAG, "createUserWithEmail:success");
                             Toast.makeText(RegisterActivity.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
 
@@ -85,8 +85,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     // Creates an instance of the handler class and calls it's saveUser method
-    private void saveUser(String email, String password) {
-        uDBHandler = new UserHandler(email, password);
+    private void saveUser(String email) {
+        uDBHandler = new UserHandler(email);
         uDBHandler.saveUser();
         uDBHandler.sendEmailVerification();
 

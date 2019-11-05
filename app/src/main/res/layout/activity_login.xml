@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:textAlignment="center"
     tools:context=".login_and_register.LoginActivity">
 
     <EditText
@@ -46,20 +47,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:text="@string/register_hyperlink"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginButton" />
-
-    <TextView
-        android:id="@+id/statusTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="@string/placeholder"
-        android:textColor="@android:color/transparent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerHyperlink" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/googleSignInButton"
@@ -69,7 +60,7 @@
         android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/statusTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/registerHyperlink" />
 
 
     <com.facebook.login.widget.LoginButton

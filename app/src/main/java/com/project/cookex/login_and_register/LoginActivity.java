@@ -37,6 +37,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.project.cookex.HomeActivity;
 import com.project.cookex.R;
+import com.project.cookex.database_handling.UserHandler;
 
 /**
  * THIS IS THE MAIN ACTIVITY
@@ -56,7 +57,10 @@ public class LoginActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 420;
 
     // Facebook Sign-in
-    CallbackManager mCallbackManager;
+    private CallbackManager mCallbackManager;
+
+    // User handler for database actions
+    private UserHandler uDBHandler;
 
     @Override
     protected void onStart() {
@@ -237,7 +241,7 @@ public class LoginActivity extends AppCompatActivity {
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
-                // Google Sign In was successful, authenticate with Firebase
+                // Google Sign In was successful, authenticate with Firebase and create document
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
@@ -260,6 +264,7 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            saveGoogleAndFacebookUsers(user.getEmail());
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -283,6 +288,7 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            saveGoogleAndFacebookUsers(user.getEmail());
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -292,6 +298,11 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private void saveGoogleAndFacebookUsers(String email) {
+        uDBHandler = new UserHandler(email);
+        uDBHandler.saveUser();
     }
 
 }

@@ -31,40 +31,40 @@ public class UserHandler {
     private static final String KEY_MID_NAME = "Middle";
     private static final String KEY_LAST_NAME = "Last";
     private static final String KEY_EMAIL = "Email";
-    private static final String KEY_PASSWORD = "Password";
     private static final String KEY_BIRTHDAY = "Birthday";
 
     private String firstName, middleName, lastName;
     private String email, password, birthday;
 
     // Constructors - the proper one will be used depending on how much info users give during registry
-    public UserHandler(String email, String password) {
+    public UserHandler(String email) {
         this.email = email;
-        this.password = password;
         this.mAuth = FirebaseAuth.getInstance();
         this.fUser = mAuth.getCurrentUser();
     }
 
-    public UserHandler(String firstName, String lastName, String email, String password) {
+    public UserHandler(String email, String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
         this.mAuth = FirebaseAuth.getInstance();
         this.fUser = mAuth.getCurrentUser();
     }
 
-    public UserHandler(String firstName, String middleName, String lastName, String email, String password) {
+    public UserHandler(String email, String firstName, String middleName, String lastName) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
         this.mAuth = FirebaseAuth.getInstance();
         this.fUser = mAuth.getCurrentUser();
     }
 
-    public UserHandler(){}
+    public UserHandler() {
+        this.mAuth = FirebaseAuth.getInstance();
+        this.fUser = mAuth.getCurrentUser();
+        this.email = fUser.getEmail();
+    }
 
     // Getters & Setters
     public String getFirstName() {
@@ -183,7 +183,6 @@ public class UserHandler {
         HashMap<String, Object> userInfo = new HashMap<>();
 
         userInfo.put(KEY_EMAIL, email);
-        userInfo.put(KEY_PASSWORD, password);
 
         if (firstName != null) {
             userInfo.put(KEY_FIRST_NAME, firstName);
