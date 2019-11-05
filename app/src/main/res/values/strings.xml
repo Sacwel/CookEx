@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">CookEx</string>
-    <string name="placeholder">placeholder</string>
 
+    // Sign in and up pages
+    <string name="app_name">CookEx</string>
     <string name="auth_failed">Authentication failed.</string>
     <string name="email">Email:</string>
     <string name="password">Password:</string>
@@ -9,6 +9,8 @@
     <string name="login_button">LOGIN</string>
     <string name="register_hyperlink">Want to sign up? Click here.</string>
     <string name="username">Username</string>
+
+    // Navigation Drawer
     <string name="user_photo">user_photo</string>
     <string name="categories">Categories</string>
     <string name="search">Search</string>
@@ -16,15 +18,20 @@
     <string name="settings">Settings</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <string name="lucas_hej">Lucas hej</string>
+
+    // User profile page
     <string name="name_surname">Name Surname</string>
     <string name="my_recipes">My Recipes</string>
 
+    // Settings page
+    <string name="log_out">Log Out</string>
+
+    // Facebook strings
     <string name="facebook_app_id">2764047660488460</string>
     <string name="fb_login_protocol_scheme">fb2764047660488460</string>
 
+    // If need be, additional categories can be added here
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="log_out">Log Out</string>
+    // Just a simple placeholder
+    <string name="placeholder">placeholder</string>
 </resources>
