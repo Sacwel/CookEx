@@ -35,6 +35,7 @@ public class UserHandler {
 
     private String firstName, middleName, lastName;
     private String email, password, birthday;
+    private boolean docExists = false;
 
     // Constructors - the proper one will be used depending on how much info users give during registry
     public UserHandler(String email) {
@@ -63,7 +64,6 @@ public class UserHandler {
     public UserHandler() {
         this.mAuth = FirebaseAuth.getInstance();
         this.fUser = mAuth.getCurrentUser();
-        this.email = fUser.getEmail();
     }
 
     // Getters & Setters
@@ -107,6 +107,13 @@ public class UserHandler {
     }
     public void setBirthday(String birthday) {
         this.birthday = birthday;
+    }
+
+    public boolean isDocExists() {
+        return docExists;
+    }
+    public void setDocExists(boolean docExists) {
+        this.docExists = docExists;
     }
 
     // Firebase stuff
@@ -154,16 +161,48 @@ public class UserHandler {
                 });
     }
 
+    // Saving users
     public void saveUser() {
 
         // Creates a reference to the Firebase Firestore collection named users
-        CollectionReference users = db.collection("users");
+        CollectionReference users = db.collection("Accounts")
+                .document("Native")
+                .collection("Email/Password");
 
         // Mapping the information given with the makeDocument method
         Map userInfo = makeDocument();
 
         // Add the mapped information to the users collection as a document with a generated ID
         users.add(userInfo)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+    }
+
+
+    // Not yet in use these two
+    /*
+    public void saveGoogleUser() {
+        // Creates a reference to the Firebase Firestore collection named googleUsers
+        CollectionReference googleUser = db.collection("Accounts")
+                .document("3rd Party")
+                .collection("Google");
+
+        // Mapping the information given with the makeDocument method
+        Map userInfo = makeDocument();
+
+        // Add the mapped information to the users collection as a document with a generated ID
+        googleUser.add(userInfo)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
@@ -177,6 +216,31 @@ public class UserHandler {
                     }
                 });
     }
+    public void saveFacebookUser() {
+        // Creates a reference to the Firebase Firestore collection named googleUsers
+        CollectionReference facebookUser = db.collection("Accounts")
+                .document("3rd Party")
+                .collection("Facebook");
+
+        // Mapping the information given with the makeDocument method
+        Map userInfo = makeDocument();
+
+        // Add the mapped information to the users collection as a document with a generated ID
+        facebookUser.add(userInfo)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+    }
+     */
 
     // Depending on the information given during registry, the proper map will be created
     private Map<String, Object> makeDocument() {

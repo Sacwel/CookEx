@@ -134,16 +134,12 @@ public class LoginActivity extends AppCompatActivity {
 
             public void onCancel() {
                 Log.d(TAG, "facebook:onCancel");
-                // [START_EXCLUDE]
                 updateUI(null);
-                // [END_EXCLUDE]
             }
 
             public void onError(FacebookException error) {
                 Log.d(TAG, "facebook:onError", error);
-                // [START_EXCLUDE]
                 updateUI(null);
-                // [END_EXCLUDE]
             }
         });
     }
@@ -218,7 +214,6 @@ public class LoginActivity extends AppCompatActivity {
         if (currentUser != null) {
 
             // Redirect the user inside the app after checking if he's already signed in
-
             Toast.makeText(LoginActivity.this, "Hi there, " + currentUser.getDisplayName() + "!", Toast.LENGTH_SHORT).show();
 
             Intent loginSuccess = new Intent(LoginActivity.this, HomeActivity.class);
@@ -244,6 +239,7 @@ public class LoginActivity extends AppCompatActivity {
                 // Google Sign In was successful, authenticate with Firebase and create document
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
+
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
@@ -264,7 +260,6 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            saveGoogleAndFacebookUsers(user.getEmail());
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -288,7 +283,6 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            saveGoogleAndFacebookUsers(user.getEmail());
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -298,11 +292,6 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
-    }
-
-    private void saveGoogleAndFacebookUsers(String email) {
-        uDBHandler = new UserHandler(email);
-        uDBHandler.saveUser();
     }
 
 }
