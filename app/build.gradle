@@ -37,12 +37,14 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 
     // Google implementations
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.core:core:1.1.0'
     implementation 'com.google.api-client:google-api-client-android:1.30.4'
     implementation 'com.google.api:api-common:1.8.1'
+    implementation 'com.shobhitpuri.custombuttons:google-signin:1.1.0'
 
     // Facebook
     implementation 'com.facebook.android:facebook-android-sdk:5.9.0'

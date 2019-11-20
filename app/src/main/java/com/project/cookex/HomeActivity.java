@@ -20,7 +20,7 @@ import androidx.appcompat.widget.Toolbar;
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
-    private Toolbar mToolbar;
+    public Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +67,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.Create_recipe:
-                Toast.makeText(this, "Create a recipe", Toast.LENGTH_SHORT).show();
+                Intent goToCreateRecipe = new Intent(HomeActivity.this, CreateRecipeActivity.class);
+                startActivity(goToCreateRecipe);
                 break;
             case R.id.Categories:
                 Toast.makeText(this, "Categories", Toast.LENGTH_SHORT).show();

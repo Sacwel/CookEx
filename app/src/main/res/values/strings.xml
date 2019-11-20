@@ -34,4 +34,9 @@
 
     // Just a simple placeholder
     <string name="placeholder">placeholder</string>
+
+    //Create recipe page
+    <string name="enter_recipe_name">Enter recipe name</string>
+    <string name="description">Description</string>
+    <string name="add_steps">Add Steps</string>
 </resources>
