@@ -27,6 +27,7 @@ public class UserHandler {
     private FirebaseUser fUser;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    private static final String KEY_PICTURE_URI = "Profile Picture";
     private static final String KEY_FIRST_NAME = "First";
     private static final String KEY_MID_NAME = "Middle";
     private static final String KEY_LAST_NAME = "Last";
