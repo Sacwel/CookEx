@@ -70,6 +70,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 Intent goToCreateRecipe = new Intent(HomeActivity.this, CreateRecipeActivity.class);
                 startActivity(goToCreateRecipe);
                 break;
+            case R.id.scale_button:
+                Intent goToScaleView = new Intent(HomeActivity.this, ScaleActivity.class);
+                startActivity(goToScaleView);
+                break;
             case R.id.Categories:
                 Toast.makeText(this, "Categories", Toast.LENGTH_SHORT).show();
                 break;

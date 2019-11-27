@@ -22,6 +22,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeActivity"/>
         </activity>
+        <activity android:name=".ScaleActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".HomeActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+            android:value=".HomeActivity"/>
+        </activity>
         <activity
             android:name=".SettingsActivity"
             android:launchMode="singleTop"
