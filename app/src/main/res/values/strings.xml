@@ -67,5 +67,6 @@
     <string name="unknown_characteristic">Unknown Characteristic</string>
     <string name="scan">Scan</string>
     <string name="time">Time</string>
+    <string name="steps">steps</string>
 
 </resources>
