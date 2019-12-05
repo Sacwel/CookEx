@@ -16,7 +16,7 @@
         android:background="@color/colorPrimary">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout"
+            android:id="@+id/textInputLayout_step_name"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -32,18 +32,20 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatSpinner
-            android:background="#FFF"
+            android:id="@+id/type_of_recipe_create"
             android:layout_width="105dp"
             android:layout_height="54dp"
-            android:layout_marginStart="39dp"
+            android:layout_marginStart="26dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textInputLayout"
-            app:layout_constraintTop_toTopOf="parent"
-            android:spinnerMode="dropdown"
+            android:background="#FFF"
+            android:entries="@string/step_name"
             android:prompt="@string/step_mode_prompt"
-            android:entries="@string/step_name"/>
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/textInputLayout_step_name"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutDescription"
@@ -100,6 +102,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.79" />
+
+        <ImageView
+            android:id="@+id/remove_step"
+            android:background="#FFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/exit_button_delete_step" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

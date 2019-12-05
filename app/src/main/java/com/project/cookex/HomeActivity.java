@@ -1,6 +1,7 @@
 package com.project.cookex;
 
 import com.google.android.material.navigation.NavigationView;
+import com.project.cookex.Adapters.ViewRecipeAdapter;
 import com.project.cookex.Bluetooth.DeviceControlActivity;
 import com.project.cookex.Bluetooth.DeviceScanActivity;
 
@@ -22,6 +23,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -31,11 +36,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private Button buttonForBluetooth;
     private Button buttonForScan;
     private int REQUEST_ENABLE_BT;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        ArrayList<DataModel> dataModelList = new ArrayList<>();
+        dataModelList.add(new DataModel("Pasta Carbonara", "Great Dinner idea", R.drawable.ic_keyboard_arrow_right_black_24dp, "4.8/5"));
+        dataModelList.add(new DataModel("Pasta Bolognese", "Great Lunch idea", R.drawable.ic_phone_iphone_white_24dp, "1.4/5"));
+        dataModelList.add(new DataModel("Pasta med Trøffel", "Great breakfast idea", R.drawable.ic_turned_in_not_black_24dp, "5/5"));
 
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
@@ -55,6 +68,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         };
 
+        mRecyclerView = findViewById(R.id.main_menu_recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mAdapter = new ViewRecipeAdapter(dataModelList);
+
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+
+
+        /*
         buttonForScan = findViewById(R.id.Scan_button);
         buttonForScan.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -79,7 +102,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(goToBluetooth);
             }
         });
-
+*/
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
