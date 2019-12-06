@@ -1,13 +1,11 @@
-package com.project.cookex;
-
-import android.widget.Spinner;
+package com.project.cookex.Model;
 
 public class DataModel {
 
-    String name;
-    String description;
-    int imageResource;
-    String rating;
+    private String name;
+    private String description;
+    private int imageResource;
+    private String rating;
 
     public DataModel(String name, String description, int imageResource, String rating){
         this.name = name;

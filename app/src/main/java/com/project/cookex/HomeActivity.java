@@ -2,8 +2,7 @@ package com.project.cookex;
 
 import com.google.android.material.navigation.NavigationView;
 import com.project.cookex.Adapters.ViewRecipeAdapter;
-import com.project.cookex.Bluetooth.DeviceControlActivity;
-import com.project.cookex.Bluetooth.DeviceScanActivity;
+import com.project.cookex.Model.DataModel;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -12,8 +11,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;

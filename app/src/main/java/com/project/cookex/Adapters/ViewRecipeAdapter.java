@@ -9,22 +9,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.project.cookex.DataModel;
+import com.project.cookex.Model.DataModel;
 import com.project.cookex.R;
 
 import java.util.ArrayList;
 
 public class ViewRecipeAdapter extends RecyclerView.Adapter<ViewRecipeAdapter.ViewRecipeViewHolder> {
-    public ArrayList<DataModel> dataset;
+    private ArrayList<DataModel> dataset;
 
-    public static class ViewRecipeViewHolder extends RecyclerView.ViewHolder{
+    static class ViewRecipeViewHolder extends RecyclerView.ViewHolder{
 
-        public ImageView mImageView;
-        public TextView mName;
-        public TextView mDescription;
-        public TextView rating;
+        ImageView mImageView;
+        TextView mName;
+        TextView mDescription;
+        TextView rating;
 
-        public ViewRecipeViewHolder(@NonNull View itemView) {
+        ViewRecipeViewHolder(@NonNull View itemView) {
             super(itemView);
             mName = itemView.findViewById(R.id.Recipe_name_view_recipe);
             mImageView = itemView.findViewById(R.id.image_of_recipe_main_menu);
