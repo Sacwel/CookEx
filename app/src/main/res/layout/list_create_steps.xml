@@ -13,57 +13,33 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:background="@color/colorPrimary">
+        android:background="#FFF">
 
-        <com.google.android.material.textfield.TextInputLayout
+        <EditText
             android:id="@+id/textInputLayout_step_name"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:textSize="24sp"
             android:hint="@string/step_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.083"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="200dp"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/type_of_recipe_create"
-            android:layout_width="105dp"
-            android:layout_height="54dp"
-            android:layout_marginStart="26dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            android:background="#FFF"
-            android:entries="@string/step_name"
-            android:prompt="@string/step_mode_prompt"
-            android:spinnerMode="dropdown"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/textInputLayout_step_name"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.textfield.TextInputLayout
+        <EditText
             android:id="@+id/textInputLayoutDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="80dp"
             android:hint="@string/description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.16"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginEnd="16dp"/>
 
         <EditText
             android:id="@+id/editTextTimer"
@@ -102,17 +78,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.79" />
-
-        <ImageView
-            android:id="@+id/remove_step"
-            android:background="#FFF"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/exit_button_delete_step" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

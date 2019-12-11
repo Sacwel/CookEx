@@ -19,13 +19,13 @@
         <include layout="@layout/toolbar" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/SignOutButton"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="500dp"
-        android:backgroundTint="@color/colorPrimaryDark"
+        android:background="@color/colorPrimaryDark"
         android:text="@string/log_out"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
