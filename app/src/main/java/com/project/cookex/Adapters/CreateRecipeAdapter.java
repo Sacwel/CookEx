@@ -8,28 +8,29 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.project.cookex.Model.RecipeModel;
+import com.project.cookex.recipe_management.Recipe;
 import com.project.cookex.R;
+import com.project.cookex.recipe_management.Step;
 
 import java.util.ArrayList;
 
 public class CreateRecipeAdapter extends RecyclerView.Adapter<CreateRecipeAdapter.MyViewHolder>{
 
-    private static ArrayList<RecipeModel> createRecipeArrayList;
+    private static ArrayList<Step> createRecipeArrayList;
 
     class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView textName;
         TextView textDescription;
 
-        public MyViewHolder(View itemView) {
+        MyViewHolder(View itemView) {
             super(itemView);
             textName = itemView.findViewById(R.id.textView_with_step_name);
             textDescription = itemView.findViewById(R.id.textView_with_step_description);
         }
     }
 
-    public CreateRecipeAdapter(ArrayList<RecipeModel> data){
+    public CreateRecipeAdapter(ArrayList<Step> data){
         createRecipeArrayList = data;
     }
 
@@ -43,7 +44,7 @@ public class CreateRecipeAdapter extends RecyclerView.Adapter<CreateRecipeAdapte
 
     @Override
     public void onBindViewHolder(@NonNull CreateRecipeAdapter.MyViewHolder holder, int position) {
-        RecipeModel currentItem = createRecipeArrayList.get(position);
+        Step currentItem = createRecipeArrayList.get(position);
         holder.textName.setText(currentItem.getName());
         holder.textDescription.setText(currentItem.getDescription());
     }

@@ -166,9 +166,7 @@ public class UserHandler {
     public void saveUser() {
 
         // Creates a reference to the Firebase Firestore collection named users
-        CollectionReference users = db.collection("Accounts")
-                .document("Native")
-                .collection("Email/Password");
+        CollectionReference users = db.collection("Accounts");
 
         // Mapping the information given with the makeDocument method
         Map userInfo = makeDocument();
@@ -189,6 +187,8 @@ public class UserHandler {
                     }
                 });
     }
+
+
 
 
     // Not yet in use these two

@@ -3,7 +3,6 @@ package com.project.cookex;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -19,19 +18,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.project.cookex.Adapters.CreateRecipeAdapter;
-import com.project.cookex.Model.RecipeModel;
+import com.project.cookex.database_handling.RecipeHandler;
 import com.project.cookex.recipe_management.Recipe;
+import com.project.cookex.recipe_management.Step;
 
 import java.util.ArrayList;
+
+// TODO: 2019-12-15
+// Should be structured for better overview and properly use both Recipe and Handler classes
+// Works as supposed right now but help is needed for the database implementation
 
 public class CreateRecipeActivity extends AppCompatActivity {
 
     private CreateRecipeAdapter createRecipeAdapter;
-    private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
-    private static ArrayList<RecipeModel> data;
-    private Button buttonAddStep;
-    private EditText name, description;
+    private static ArrayList<Step> steps;
+    private EditText mStepNameField, mStepDescriptionField;
+    private EditText mRecipeNameField, mRecipeDescriptionField;
+    private RecipeHandler mRecipeHandler;
+    private String nameOfRecipe, descriptionOfRecipe;
+    private String nameOfStep, descriptionOfStep;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,37 +49,40 @@ public class CreateRecipeActivity extends AppCompatActivity {
         //Creating steps with recycler view
         buildRecyclerView();
 
-        buttonAddStep = (Button) findViewById(R.id.add_steps_button);
-        data = new ArrayList<>();
+        mRecipeNameField = findViewById(R.id.nameOfRecipe);
+        mRecipeDescriptionField = findViewById(R.id.recipeDescription);
+
+        Button buttonAddStep = (Button) findViewById(R.id.add_steps_button);
+        steps = new ArrayList<>();
 
         buttonAddStep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(CreateRecipeActivity.this);
                 LayoutInflater dialogInflater = (LayoutInflater) CreateRecipeActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View dialogView = dialogInflater.inflate(R.layout.list_create_steps, null);
                 builder.setView(dialogView);
 
-                name = (EditText) dialogView.findViewById(R.id.textInputLayout_step_name);
-                description = (EditText) dialogView.findViewById(R.id.textInputLayoutDescription);
+                mStepNameField = (EditText) dialogView.findViewById(R.id.nameOfStep);
+                mStepDescriptionField = (EditText) dialogView.findViewById(R.id.descriptionOfStep);
 
                 builder.setTitle("Enter the step");
-
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        int position;
-                        if (data.size() == 0){
-                            position = 0;
+                        int index;
+                        if (steps.size() == 0){
+                            index = 0;
                         } else {
-                            position = data.size();
+                            index = steps.size();
                         }
-                        String nameForStep = name.getText().toString().trim();
-                        String descriptionForStep = description.getText().toString().trim();
-                        RecipeModel currentItem = new RecipeModel(nameForStep, descriptionForStep);
-                        //data = addItems(position, currentItem);
-                        data.add(position, currentItem);
-                        createRecipeAdapter = new CreateRecipeAdapter(data);
+                        nameOfStep = mStepNameField.getText().toString().trim();
+                        descriptionOfStep = mStepDescriptionField.getText().toString().trim();
+                        Step currentItem = new Step(nameOfStep, descriptionOfStep);
+                        steps.add(index, currentItem);
+
+                        createRecipeAdapter = new CreateRecipeAdapter(steps);
                         recyclerView.setAdapter(createRecipeAdapter);
                     }
                 });
@@ -82,11 +91,31 @@ public class CreateRecipeActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+
+        Button saveStepsButton = findViewById(R.id.saveRecipeStepsButton);
+        steps = new ArrayList<>();
+
+        saveStepsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = mRecipeNameField.getText().toString().trim();
+                String description = mRecipeDescriptionField.getText().toString().trim();
+
+                Recipe currentRecipe = conjureRecipe(name, description, steps);
+                mRecipeHandler = new RecipeHandler(currentRecipe);
+                mRecipeHandler.addRecipe();
+            }
+        });
+
     }
 
-    public ArrayList<RecipeModel> addItems(int position, RecipeModel recipeModel){
-        ArrayList<RecipeModel> list = new ArrayList<>();
-        list.add(position, recipeModel);
+    private Recipe conjureRecipe(String name, String desc, ArrayList<Step> steps) {
+        return new Recipe(name, desc, steps);
+    }
+
+    public ArrayList<Recipe> addItems(int position, Recipe recipe){
+        ArrayList<Recipe> list = new ArrayList<>();
+        list.add(position, recipe);
         return list;
     }
 
@@ -100,7 +129,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
     public void buildRecyclerView(){
         recyclerView = findViewById(R.id.recycler_view_create_recipe);
         recyclerView.setHasFixedSize(false);
-        layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

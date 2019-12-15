@@ -1,22 +1,21 @@
 package com.project.cookex.recipe_management;
 
-public abstract class Recipe {
+import java.util.ArrayList;
+import java.util.List;
 
-    private String name, category;
-    private String[] ingredients, tags;
-    private int rating, priceLevel, servings;
-    private double prepTime, cookTime;
+// TODO: 2019-12-15
+// Changed the name from 'RecipeModel' and merged with my already existing Recipe class
 
-    public Recipe(String name, String[] ingredients, String category, String[] tags, int rating, int priceLevel, int servings, double prepTime, double cookTime) {
+public class Recipe {
+
+    private String name, description;
+    private String stepDescription;
+    private ArrayList<Step> steps;
+
+    public Recipe(String name, String description, ArrayList<Step> steps) {
         this.name = name;
-        this.ingredients = ingredients;
-        this.category = category;
-        this.tags = tags;
-        this.rating = rating;
-        this.priceLevel = priceLevel;
-        this.servings = servings;
-        this.prepTime = prepTime;
-        this.cookTime = cookTime;
+        this.description = description;
+        this.steps = steps;
     }
 
     public String getName() {
@@ -26,59 +25,24 @@ public abstract class Recipe {
         this.name = name;
     }
 
-    public String[] getIngredients() {
-        return ingredients;
+    public String getDescription() {
+        return description;
     }
-    public void setIngredients(String[] ingredients) {
-        this.ingredients = ingredients;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-    public void setCategory(String category) {
-        this.category = category;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String[] getTags() {
-        return tags;
+    public String getStepDescription() {
+        return stepDescription;
     }
-    public void setTags(String[] tags) {
-        this.tags = tags;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-    public void setRating(int rating) {
-        this.rating = rating;
+    public void setStepDescription(String stepDescription) {
+        this.stepDescription = stepDescription;
     }
 
-    public int getPriceLevel() {
-        return priceLevel;
+    public ArrayList<Step> getSteps() {
+        return steps;
     }
-    public void setPriceLevel(int priceLevel) {
-        this.priceLevel = priceLevel;
-    }
-
-    public int getServings() {
-        return servings;
-    }
-    public void setServings(int servings) {
-        this.servings = servings;
-    }
-
-    public double getPrepTime() {
-        return prepTime;
-    }
-    public void setPrepTime(double prepTime) {
-        this.prepTime = prepTime;
-    }
-
-    public double getCookTime() {
-        return cookTime;
-    }
-    public void setCookTime(double cookTime) {
-        this.cookTime = cookTime;
+    public void setSteps(ArrayList<Step> steps) {
+        this.steps = steps;
     }
 }
