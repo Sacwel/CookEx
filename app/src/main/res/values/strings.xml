@@ -36,11 +36,11 @@
     <string name="placeholder">placeholder</string>
 
     //Create recipe page
-    <string name="enter_recipe_name">Enter recipe stepName</string>
+    <string name="enter_recipe_name">Enter recipe name</string>
     <string name="stepDescription">Description</string>
     <string name="add_steps">Add Steps</string>
     <string name="scale">Scale</string>
-    <string name="step_name">Step stepName</string>
+    <string name="step_name">Step name</string>
     <string name="normal_value_menu">Normal</string>
     <string name="timer_value_menu">Timer</string>
     <string name="weight_value_menu">Weight</string>
