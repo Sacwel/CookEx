@@ -15,7 +15,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <include layout="@layout/toolbar" />
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -27,8 +26,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-
     </androidx.appcompat.widget.AppCompatImageView>
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -43,7 +40,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="200dp"
@@ -71,14 +67,14 @@
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:hint="@string/description">
+        android:hint="@string/description"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -98,18 +94,19 @@
         android:id="@+id/recycler_view_create_recipe"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/add_steps_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_steps_text">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toBottomOf="@+id/add_steps_text"></androidx.recyclerview.widget.RecyclerView>
 
     <Button
         android:id="@+id/add_steps_button"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
         android:text="@string/add_steps"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
