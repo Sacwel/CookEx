@@ -60,7 +60,8 @@ public class CreateRecipeActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(CreateRecipeActivity.this);
-                LayoutInflater dialogInflater = (LayoutInflater) CreateRecipeActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                LayoutInflater dialogInflater = (LayoutInflater) CreateRecipeActivity.this
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View dialogView = dialogInflater.inflate(R.layout.list_create_steps, null);
                 builder.setView(dialogView);
 
@@ -111,12 +112,6 @@ public class CreateRecipeActivity extends AppCompatActivity {
 
     private Recipe conjureRecipe(String name, String desc, ArrayList<Step> steps) {
         return new Recipe(name, desc, steps);
-    }
-
-    public ArrayList<Recipe> addItems(int position, Recipe recipe){
-        ArrayList<Recipe> list = new ArrayList<>();
-        list.add(position, recipe);
-        return list;
     }
 
     public void initiateToolbar(){
