@@ -68,5 +68,6 @@
     <string name="scan">Scan</string>
     <string name="time">Time</string>
     <string name="steps">steps</string>
+    <string name="Save">save</string>
 
 </resources>
