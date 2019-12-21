@@ -1,7 +1,6 @@
 package com.project.cookex.recipe_management;
 
 import java.util.ArrayList;
-import java.util.List;
 
 // TODO: 2019-12-15
 // Changed the name from 'RecipeModel' and merged with my already existing Recipe class

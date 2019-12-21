@@ -188,82 +188,11 @@ public class UserHandler {
                 });
     }
 
-
-
-
-    // Not yet in use these two
-    /*
-    public void saveGoogleUser() {
-        // Creates a reference to the Firebase Firestore collection named googleUsers
-        CollectionReference googleUser = db.collection("Accounts")
-                .document("3rd Party")
-                .collection("Google");
-
-        // Mapping the information given with the makeDocument method
-        Map userInfo = makeDocument();
-
-        // Add the mapped information to the users collection as a document with a generated ID
-        googleUser.add(userInfo)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });
-    }
-    public void saveFacebookUser() {
-        // Creates a reference to the Firebase Firestore collection named googleUsers
-        CollectionReference facebookUser = db.collection("Accounts")
-                .document("3rd Party")
-                .collection("Facebook");
-
-        // Mapping the information given with the makeDocument method
-        Map userInfo = makeDocument();
-
-        // Add the mapped information to the users collection as a document with a generated ID
-        facebookUser.add(userInfo)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });
-    }
-     */
-
-    // Depending on the information given during registry, the proper map will be created
+    // Method for creating the initial user document
     private Map<String, Object> makeDocument() {
         HashMap<String, Object> userInfo = new HashMap<>();
 
         userInfo.put(KEY_EMAIL, email);
-
-        if (firstName != null) {
-            userInfo.put(KEY_FIRST_NAME, firstName);
-        }
-
-        if (middleName != null) {
-            userInfo.put(KEY_MID_NAME, middleName);
-        }
-
-        if (lastName != null) {
-            userInfo.put(KEY_LAST_NAME, lastName);
-        }
-
-        if (birthday != null) {
-            userInfo.put(KEY_BIRTHDAY, birthday);
-        }
 
         return userInfo;
     }
